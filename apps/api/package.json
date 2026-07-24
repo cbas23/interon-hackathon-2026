@@ -1,0 +1,26 @@
+{
+  "name": "@app/api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/local.ts",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "latest",
+    "hono": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/aws-lambda": "latest",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.7.0",
+    "tsx": "latest",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.65.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "tanstack-hono-aws",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "bun --cwd apps/web dev",
+    "dev:api": "bun --cwd apps/api dev",
+    "build": "bun --cwd apps/web build",
+    "lint": "bun --cwd apps/web lint && bun --cwd apps/api lint",
+    "format": "prettier --write apps/web apps/api",
+    "format:check": "prettier --check apps/web apps/api",
+    "deploy": "bun --cwd infra cdk deploy"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.6"
+  }
+}
