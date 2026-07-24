@@ -133,12 +133,6 @@ export function PatientSearch({
     <main className="mx-auto grid w-full max-w-6xl flex-1 items-start gap-10 px-5 py-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-8 lg:py-20">
       <section className="flex flex-col gap-8 lg:sticky lg:top-12">
         <div className="flex flex-col gap-4">
-          <Badge
-            variant="outline"
-            className="font-mono uppercase tracking-wider"
-          >
-            Medication reconciliation
-          </Badge>
           <h1 className="max-w-xl text-4xl leading-[1.05] font-semibold tracking-tight sm:text-5xl">
             Start with the right patient.
           </h1>
@@ -147,14 +141,6 @@ export function PatientSearch({
             against every available source record.
           </p>
         </div>
-
-        <Alert className="max-w-lg bg-secondary/35">
-          <ShieldCheck />
-          <AlertDescription>
-            Connected to a public FHIR test source. Do not enter real patient
-            information. Reconciliation results always require clinician review.
-          </AlertDescription>
-        </Alert>
       </section>
 
       <section
@@ -166,9 +152,6 @@ export function PatientSearch({
             <CardTitle id="search-title" className="text-xl">
               Patient search
             </CardTitle>
-            <CardDescription>
-              Use any field or combine fields to narrow the results.
-            </CardDescription>
           </CardHeader>
           <CardContent>
             <form className="flex flex-col gap-6" onSubmit={handleSubmit}>

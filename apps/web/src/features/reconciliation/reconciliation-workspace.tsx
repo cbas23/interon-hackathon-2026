@@ -156,11 +156,13 @@ function FindingCard({ finding }: { finding: ReconciliationFinding }) {
         : 'outline'
   const Icon = finding.severity === 'urgent' ? AlertTriangle : CheckCircle2
 
+  const alignedColor = finding.severity === 'info' ? 'bg-emerald-300' : ''
+
   return (
     <Card size="sm" className="bg-background">
       <CardHeader>
         <div className="mb-1 flex flex-wrap items-center gap-2">
-          <Badge variant={variant}>
+          <Badge variant={variant} className={alignedColor}>
             <Icon data-icon="inline-start" />
             {finding.severity === 'urgent'
               ? 'Safety review'
@@ -227,22 +229,27 @@ function ClinicalRecordCard({ record }: { record: ClinicalRecord }) {
           ) : null}
           {record.medications.length > 0 ? (
             <div className="overflow-x-auto rounded-lg border">
-              <table className="w-full min-w-xl text-left text-sm">
+              <table className="w-full min-w-xl table-fixed text-left text-sm">
+                <colgroup>
+                  <col className="w-[35%]" />
+                  <col className="w-[45%]" />
+                  <col className="w-[20%]" />
+                </colgroup>
                 <thead className="bg-muted/60 text-xs uppercase tracking-wider text-muted-foreground">
                   <tr>
-                    <th className="px-3 py-2 font-medium">Medication</th>
-                    <th className="px-3 py-2 font-medium">Directions</th>
-                    <th className="px-3 py-2 font-medium">Status</th>
+                    <th className="px-4 py-2.5 font-medium">Medication</th>
+                    <th className="px-4 py-2.5 font-medium">Directions</th>
+                    <th className="px-4 py-2.5 font-medium">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
                   {record.medications.map((medication) => (
                     <tr key={`${medication.name}-${medication.strength}`}>
-                      <td className="px-3 py-3 font-medium">
+                      <td className="px-4 py-3 align-top font-medium">
                         {medication.name}
                         {medication.strength ? ` ${medication.strength}` : ''}
                       </td>
-                      <td className="px-3 py-3 text-muted-foreground">
+                      <td className="px-4 py-3 align-top text-muted-foreground">
                         {[
                           medication.dose,
                           medication.route,
@@ -251,7 +258,7 @@ function ClinicalRecordCard({ record }: { record: ClinicalRecord }) {
                           .filter(Boolean)
                           .join(', ') || 'Directions not recorded'}
                       </td>
-                      <td className="px-3 py-3">
+                      <td className="px-4 py-3 align-top">
                         <Badge
                           variant={
                             medication.status === 'active'
@@ -297,31 +304,6 @@ function ReconciliationResults({ result }: { result: ReconciliationResponse }) {
             </CardHeader>
             <CardContent>
               <p className="text-base leading-relaxed">{result.summary}</p>
-            </CardContent>
-            <CardFooter className="border-primary-foreground/20 bg-primary-foreground/10">
-              <p className="text-xs">
-                Decision support only. Verify against source records and use
-                clinical judgment before changing medications.
-              </p>
-            </CardFooter>
-          </Card>
-
-          <Card size="sm" className="bg-background">
-            <CardHeader>
-              <CardTitle>Questions for the patient</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {result.reviewQuestions.length > 0 ? (
-                <ol className="flex list-decimal flex-col gap-3 pl-5 text-sm leading-relaxed">
-                  {result.reviewQuestions.map((question) => (
-                    <li key={question}>{question}</li>
-                  ))}
-                </ol>
-              ) : (
-                <p className="text-sm text-muted-foreground">
-                  No follow-up questions were generated.
-                </p>
-              )}
             </CardContent>
           </Card>
         </div>
@@ -450,9 +432,6 @@ export function ReconciliationWorkspace({
           <ArrowLeft data-icon="inline-start" />
           Patient search
         </Button>
-        <Badge variant="outline" className="font-mono">
-          FHIR SOURCE
-        </Badge>
       </div>
 
       <PatientIdentity patient={context.data.patient} />
