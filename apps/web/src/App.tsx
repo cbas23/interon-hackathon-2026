@@ -1,69 +1,39 @@
-import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import { Cross } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-
-type HealthResponse = {
-  status: string
-  timestamp: string
-}
-
-async function getHealth(): Promise<HealthResponse> {
-  const response = await fetch('/api/health')
-
-  if (!response.ok) {
-    throw new Error(`Server returned ${response.status}`)
-  }
-
-  return response.json() as Promise<HealthResponse>
-}
+import { PatientSearch } from '@/features/reconciliation/patient-search'
+import { ReconciliationWorkspace } from '@/features/reconciliation/reconciliation-workspace'
 
 function App() {
-  const health = useQuery({
-    queryKey: ['health'],
-    queryFn: getHealth,
-    retry: 1,
-  })
-
-  const label = health.isPending
-    ? 'Checking server'
-    : health.isError
-      ? 'Server offline'
-      : 'Server online'
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
+    null,
+  )
 
   return (
-    <main className="flex min-h-svh items-center justify-center p-6">
-      <section className="flex w-full max-w-sm flex-col items-center gap-5 text-center">
-        <div className="flex items-center gap-2 text-sm font-medium">
-          <span
-            className={`size-2 rounded-full ${
-              health.isPending
-                ? 'animate-pulse bg-muted-foreground'
-                : health.isError
-                  ? 'bg-destructive'
-                  : 'bg-emerald-500'
-            }`}
-            aria-hidden="true"
-          />
-          {label}
+    <div className="flex min-h-svh flex-col">
+      <header className="border-b bg-background/95">
+        <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-5 lg:px-8">
+          <div className="flex items-center gap-2.5 font-semibold tracking-tight">
+            <span className="flex size-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <Cross className="size-4" strokeWidth={2.5} />
+            </span>
+            MedLedger
+          </div>
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-foreground">
+            Reconciliation workspace
+          </p>
         </div>
+      </header>
 
-        <p className="text-sm text-muted-foreground">
-          {health.isError
-            ? health.error.message
-            : health.data
-              ? `Last checked ${new Date(health.data.timestamp).toLocaleTimeString()}`
-              : 'Connecting to the API...'}
-        </p>
-
-        <Button
-          variant="outline"
-          onClick={() => health.refetch()}
-          disabled={health.isFetching}
-        >
-          {health.isFetching ? 'Checking...' : 'Check again'}
-        </Button>
-      </section>
-    </main>
+      {selectedPatientId ? (
+        <ReconciliationWorkspace
+          patientId={selectedPatientId}
+          onBack={() => setSelectedPatientId(null)}
+        />
+      ) : (
+        <PatientSearch onSelect={setSelectedPatientId} />
+      )}
+    </div>
   )
 }
 

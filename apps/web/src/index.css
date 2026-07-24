@@ -7,25 +7,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.9755 0.0045 258.3245);
-  --foreground: oklch(0.2558 0.0433 268.0662);
-  --card: oklch(0.9341 0.0132 251.5628);
-  --card-foreground: oklch(0.2558 0.0433 268.0662);
-  --popover: oklch(0.9856 0.0278 98.054);
-  --popover-foreground: oklch(0.2558 0.0433 268.0662);
-  --primary: oklch(0.4815 0.1178 263.3758);
-  --primary-foreground: oklch(0.9856 0.0278 98.054);
-  --secondary: oklch(0.8567 0.1164 81.0092);
-  --secondary-foreground: oklch(0.2558 0.0433 268.0662);
-  --muted: oklch(0.9202 0.008 106.5563);
-  --muted-foreground: oklch(0.4815 0.1178 263.3758);
-  --accent: oklch(0.6896 0.0714 234.0387);
-  --accent-foreground: oklch(0.9856 0.0278 98.054);
-  --destructive: oklch(0.2611 0.0376 322.5267);
-  --destructive-foreground: oklch(0.9856 0.0278 98.054);
-  --border: oklch(0.7791 0.0156 251.1926);
-  --input: oklch(0.6896 0.0714 234.0387);
-  --ring: oklch(0.8567 0.1164 81.0092);
+  --background: oklch(0.978 0.004 240);
+  --foreground: oklch(0.245 0.035 252);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.245 0.035 252);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.245 0.035 252);
+  --primary: oklch(0.39 0.09 252);
+  --primary-foreground: oklch(0.985 0.002 240);
+  --secondary: oklch(0.91 0.075 84);
+  --secondary-foreground: oklch(0.29 0.04 65);
+  --muted: oklch(0.94 0.009 240);
+  --muted-foreground: oklch(0.48 0.035 248);
+  --accent: oklch(0.88 0.035 220);
+  --accent-foreground: oklch(0.245 0.035 252);
+  --destructive: oklch(0.52 0.18 27);
+  --destructive-foreground: oklch(0.985 0.002 240);
+  --border: oklch(0.86 0.014 240);
+  --input: oklch(0.79 0.022 240);
+  --ring: oklch(0.55 0.09 245);
   --chart-1: oklch(0.4815 0.1178 263.3758);
   --chart-2: oklch(0.8567 0.1164 81.0092);
   --chart-3: oklch(0.6896 0.0714 234.0387);
@@ -184,6 +184,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply min-w-80 bg-background text-foreground antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection {
+    @apply bg-secondary text-secondary-foreground;
   }
 }

@@ -3,14 +3,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/local.ts",
+    "dev": "node --env-file-if-exists=.env --watch --import tsx src/local.ts",
+    "build": "bun build src/lambda.ts --target=node --format=cjs --outfile=dist/index.js",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@app/schemas": "workspace:*",
     "@hono/node-server": "latest",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.37",
     "hono": "latest"
   },
   "devDependencies": {

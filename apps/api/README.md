@@ -1,15 +1,27 @@
-# api
+# API
 
-To install dependencies:
+Hono API shared by the local Node server and AWS Lambda adapter.
+
+## Development
+
+From the repository root:
 
 ```bash
 bun install
+bun run dev:api
 ```
 
-To run:
+The local API runs at `http://localhost:3001`.
+
+## Environment
+
+Copy `.env.example` to `.env` and provide the OpenRouter key. The public HAPI
+FHIR R4 test server is the default data source and must not receive real PHI.
+
+## Verification
 
 ```bash
-bun run index.ts
+bun --cwd apps/api lint
+bun --cwd apps/api typecheck
+bun --cwd apps/api build
 ```
-
-This project was created using `bun init` in bun v1.3.14. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.

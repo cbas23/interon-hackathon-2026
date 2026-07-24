@@ -6,9 +6,12 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "bun run --filter './apps/*' dev",
     "dev:web": "bun --cwd apps/web dev",
     "dev:api": "bun --cwd apps/api dev",
-    "build": "bun --cwd apps/web build",
+    "build": "bun run build:web && bun run build:api",
+    "build:web": "bun --cwd apps/web build",
+    "build:api": "bun --cwd apps/api build",
     "lint": "bun --cwd apps/web lint && bun --cwd apps/api lint",
     "format": "prettier --write apps/web apps/api",
     "format:check": "prettier --check apps/web apps/api",
