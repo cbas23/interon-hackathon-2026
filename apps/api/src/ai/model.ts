@@ -26,6 +26,6 @@ export function getAiModel() {
     compatibility: 'strict',
   })
 
-  model = openrouter('openai/gpt-oss-120b:nitro')
+  model = openrouter('deepseek/deepseek-v4-flash:nitro')
   return model
 }
