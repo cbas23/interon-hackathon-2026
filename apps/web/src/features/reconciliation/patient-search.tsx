@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { ArrowRight, Search, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Search } from 'lucide-react'
 import {
   patientSearchParamsSchema,
   type Patient,

@@ -27,12 +27,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Spinner } from '@/components/ui/spinner'
@@ -297,7 +292,10 @@ function ReconciliationResults({ result }: { result: ReconciliationResponse }) {
           </div>
           <Card className="bg-primary text-primary-foreground ring-primary">
             <CardHeader>
-              <CardTitle className="text-xl">Clinical summary</CardTitle>
+              <CardTitle className="text-xl flex flex-row gap-2">
+                <Sparkles data-icon="inline-start" />
+                Clinical summary
+              </CardTitle>
               <CardDescription className="text-primary-foreground/70">
                 Generated {formatDate(result.generatedAt, true)}
               </CardDescription>
@@ -311,7 +309,6 @@ function ReconciliationResults({ result }: { result: ReconciliationResponse }) {
         <div className="flex flex-col gap-3">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-sm font-medium">Source comparison</p>
               <p className="text-sm text-muted-foreground">
                 {result.findings.length} findings across {result.records.length}{' '}
                 records
@@ -492,9 +489,7 @@ export function ReconciliationWorkspace({
                   {notesError ? (
                     <FieldError>{notesError}</FieldError>
                   ) : (
-                    <FieldDescription>
-                      Separate each medication with a new line when possible.
-                    </FieldDescription>
+                    <span></span>
                   )}
                 </Field>
               </CardContent>
