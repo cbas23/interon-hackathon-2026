@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --env-file-if-exists=.env --watch --import tsx src/local.ts",
-    "build": "bun build src/lambda.ts --target=node --format=cjs --outfile=dist/index.js",
+    "build": "bunx wrangler deploy --dry-run",
+    "deploy": "bunx wrangler deploy",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -19,7 +20,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/aws-lambda": "latest",
     "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.7.0",

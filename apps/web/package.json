@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "bun run build && bunx wrangler deploy",
+    "deploy:dry-run": "bun run build && bunx wrangler deploy --dry-run",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

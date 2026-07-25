@@ -4,7 +4,7 @@
 
 - Use Bun from the repository root; `bun.lock` and root `workspaces` are the dependency source of truth.
 - `apps/web` is the React 19 + Vite frontend. Its browser entrypoint is `apps/web/src/main.tsx`; the current UI is in `apps/web/src/App.tsx`.
-- `apps/api` is one Hono app shared by two adapters: `src/local.ts` starts the local Node server, while `src/lambda.ts` exports the AWS Lambda handler. Add routes and middleware in `src/app.ts`, not in an adapter.
+- `apps/api` is one Hono app with a local Node entrypoint in `src/local.ts` and a Cloudflare Worker entrypoint in `src/worker.ts`. Add routes and middleware in `src/app.ts`, not in an entrypoint.
 - `packages/schemas` provides shared Zod API contracts as `@app/schemas`.
 
 ## Commands

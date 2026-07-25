@@ -206,8 +206,9 @@ export function PatientSearch({
                 <FieldError>{validationError}</FieldError>
               ) : (
                 <FieldDescription>
-                  FHIR identifier searches are exact. Combine fields to narrow
-                  broad name searches.
+                  {' '}
+                  {/*FHIR identifier searches are exact. Combine fields to narrow
+                  broad name searches.*/}
                 </FieldDescription>
               )}
 

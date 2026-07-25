@@ -22,6 +22,16 @@ function serviceSignal(signal: AbortSignal | undefined, timeoutMs: number) {
 
 function mapFhirFailure(error: unknown): never {
   if (error instanceof FhirClientError) {
+    console.error('FHIR request failed', {
+      message: error.message,
+      status: error.status,
+      requestUrl: error.requestUrl,
+      cause:
+        error.cause instanceof Error
+          ? `${error.cause.name}: ${error.cause.message}`
+          : error.cause,
+    })
+
     if (error.status === 404) {
       throw new AppError(
         'PATIENT_NOT_FOUND',

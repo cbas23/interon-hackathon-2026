@@ -1,5 +1,5 @@
 {
-  "name": "tanstack-hono-aws",
+  "name": "recmeds",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -15,7 +15,9 @@
     "lint": "bun --cwd apps/web lint && bun --cwd apps/api lint",
     "format": "prettier --write apps/web apps/api",
     "format:check": "prettier --check apps/web apps/api",
-    "deploy": "bun --cwd infra cdk deploy"
+    "deploy": "bun run deploy:api && bun run deploy:web",
+    "deploy:api": "bun --cwd apps/api deploy",
+    "deploy:web": "bun --cwd apps/web deploy"
   },
   "devDependencies": {
     "eslint-config-prettier": "^10.1.8",

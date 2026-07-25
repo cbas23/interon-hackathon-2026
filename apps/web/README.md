@@ -37,3 +37,12 @@ include the `/api` path.
 bun --cwd apps/web lint
 bun --cwd apps/web build
 ```
+
+## Cloudflare deployment
+
+The frontend is deployed as the `recmeds` Worker. Its public API URL is defined
+in `.env.production` and compiled into the Vite bundle:
+
+```bash
+bun run deploy:web
+```

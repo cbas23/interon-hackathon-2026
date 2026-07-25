@@ -24,6 +24,10 @@ export interface FhirSearchOptions extends FhirRequestOptions {
   maxResources?: number
 }
 
+type FetchImplementation = (
+  ...args: Parameters<typeof fetch>
+) => ReturnType<typeof fetch>
+
 interface FhirClientErrorOptions {
   status?: number
   requestUrl: string
@@ -94,7 +98,7 @@ export class FhirClient {
   private readonly requestTimeoutMs: number
   private readonly maxPages: number
   private readonly maxResources: number
-  private readonly fetchImplementation: typeof fetch
+  private readonly fetchImplementation: FetchImplementation
 
   constructor(options: FhirClientOptions) {
     this.baseUrl = new URL(`${options.baseUrl.replace(/\/+$/, '')}/`)
@@ -103,7 +107,8 @@ export class FhirClient {
     this.requestTimeoutMs = options.requestTimeoutMs ?? 15_000
     this.maxPages = options.maxPages ?? 10
     this.maxResources = options.maxResources ?? 500
-    this.fetchImplementation = options.fetch ?? fetch
+    this.fetchImplementation =
+      options.fetch ?? ((input, init) => fetch(input, init))
   }
 
   async read<TResource extends FhirResource>(

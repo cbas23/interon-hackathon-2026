@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { LogOut } from 'lucide-react'
 
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ProviderChooser } from '@/features/auth/provider-chooser'
 import { PatientSearch } from '@/features/reconciliation/patient-search'

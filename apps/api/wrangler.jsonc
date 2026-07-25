@@ -1,0 +1,15 @@
+{
+  "name": "recmeds-api",
+  "main": "./src/worker.ts",
+  "compatibility_date": "2026-07-24",
+  "compatibility_flags": ["nodejs_compat", "enable_request_signal"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "FHIR_BASE_URL": "https://hapi.fhir.org/baseR4",
+    "WEB_ALLOWED_ORIGINS": "https://recmeds.cbas.workers.dev"
+  }
+}
